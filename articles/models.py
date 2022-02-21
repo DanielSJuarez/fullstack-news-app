@@ -7,6 +7,10 @@ from django.forms import CharField
 class Article(models.Model):
     title = models.CharField(max_length=255, null=True)
     text = models.TextField()
+    name = models.CharField(max_length=255, null=True)
     image = models.ImageField(upload_to='articles/')
+
+    def __str__(self):
+        return self.title
 
 

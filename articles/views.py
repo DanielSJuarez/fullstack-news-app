@@ -6,5 +6,4 @@ class ArticleListAPIView(generics.ListCreateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
 
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+    

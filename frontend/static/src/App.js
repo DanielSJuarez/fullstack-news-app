@@ -1,23 +1,49 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect } from 'react'
+import ArticleDetailView from './components/ArticleDetailView';
+import ArticlesList from './components/ArticlesList';
+import CreateArticleView from './components/CreateArticleView';
+import LoginRegisterUser from './components/LoginRegisterUser';
 
 function App() {
+  const [articlesList, setArticlesList] = useState(null)
+
+  const handleError = (err) => {
+    console.log(err);
+  }
+
+
+  useEffect(() => {
+    const getArticles = async () => {
+      const response = await fetch('/api/v1/articles/').catch(handleError);
+
+      if (!response.ok) {
+        throw new Error('Netword response was not OK!')
+      } else {
+        const data = await response.json();
+        setArticlesList(data);
+      }
+    }
+    getArticles();
+  }, [])
+
+  if (!articlesList) {
+    return <div>Fetching article data....</div>
+  }
+
+
+  const articleDisplay = articlesList.map(article => (
+    <ArticlesList key={article.id} {...article} />
+  ))
+
   return (
+
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <LoginRegisterUser />
+      <h1>Daily Taco News</h1>
+      <CreateArticleView />
+      {articleDisplay}
+      <ArticleDetailView />
     </div>
   );
 }
