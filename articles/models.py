@@ -7,6 +7,7 @@ from django.forms import CharField
 class Article(models.Model):
     title = models.CharField(max_length=255, null=True)
     text = models.TextField()
+    summary = models.CharField(max_length=255, null=True)
     name = models.CharField(max_length=255, null=True)
     image = models.ImageField(upload_to='articles/')
 
