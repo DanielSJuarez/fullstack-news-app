@@ -14,8 +14,8 @@ function App() {
     <div className="App">
       <LoginRegisterUser handleError={handleError}/>
       <h1>Daily Taco News</h1>
-      <CreateArticleView />
       <ArticlesList handleError={handleError}/>
+      <CreateArticleView />
     </div>
   );
 }
