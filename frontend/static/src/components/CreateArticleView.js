@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Cookies from 'js-cookie';
 
-function CreateArticleView() {
+function CreateArticleView({ auth }) {
 
     const [addImage, setAddImage] = useState(null);
     const [title, setTitle] = useState('');
@@ -11,17 +11,17 @@ function CreateArticleView() {
 
     const handleTitleInput = e => {
         const addTitle = e.target.value;
-        setTitle(addTitle)    
+        setTitle(addTitle)
     }
 
     const handleTextInput = e => {
         const addText = e.target.value;
-        setText(addText)    
+        setText(addText)
     }
 
     const handleSummaryInput = e => {
         const addSummary = e.target.value;
-        setSummary(addSummary)    
+        setSummary(addSummary)
     }
 
 
@@ -50,7 +50,7 @@ function CreateArticleView() {
             headers: {
                 'X-CSRFToken': Cookies.get('csrftoekn'),
             },
-            body: formData, 
+            body: formData,
         }
 
         fetch('/api/v1/articles/', options);
@@ -60,8 +60,9 @@ function CreateArticleView() {
         setPreview('');
     }
 
-    return (
+    const createArticle = (
         <div>
+            <p>Add Your Article</p>
             <form onSubmit={handleSubmit}>
                 <div>
                     <input type='text' name='title' placeholder='title' onChange={handleTitleInput} value={title}></input>
@@ -72,6 +73,16 @@ function CreateArticleView() {
                 </div>
                 <button type='submit'>Submit</button>
             </form>
+        </div>
+    )
+
+    const noneRegisterUser = (
+        <div>Sign in or create an account to post your own content...</div>
+    )
+
+    return (
+        <div>
+            {auth ? createArticle : noneRegisterUser}
         </div>
     )
 }
