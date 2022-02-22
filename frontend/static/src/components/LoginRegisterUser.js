@@ -144,6 +144,7 @@ function LoginRegisterUser({ handleError }) {
                 <div>
                     <button type='submit'>Login</button>
                     <button type='button' name='register' onClick={() => setRegister(true)}>Register</button>
+                    <button type='button' name='backToMain' onClick={() => setLogin(false)}>Back</button>
                 </div>
             </form>
         </div>
@@ -176,10 +177,13 @@ function LoginRegisterUser({ handleError }) {
         </div>
     )
 
+    const signOut = (
+        <button type='button' name='logout' onClick={handleLogout}>Sign Out</button>
+    )
+
     return (
         <nav>
-            {login ? register ? createAccount : signIn : loginButton}
-            <button type='button' name='logout' onClick={handleLogout}>Sign Out</button>
+            {auth ? signOut: login ? register ? createAccount : signIn : loginButton}
         </nav>
     )
 }
