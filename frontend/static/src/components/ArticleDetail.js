@@ -1,4 +1,4 @@
-function ArticleDetail({ title, image, text, name, setContentView }) {
+function ArticleDetail({ title, image, text, setContentView }) {
 
     return (
         <article className='col'>
@@ -7,7 +7,7 @@ function ArticleDetail({ title, image, text, name, setContentView }) {
             </nav>
             <h3>{title}</h3>
             <div>
-                <img src={image} alt={name} />
+                <img src={image} alt={title} />
             </div>
             <p>{text}</p>
         </article>

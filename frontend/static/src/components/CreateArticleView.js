@@ -48,12 +48,12 @@ function CreateArticleView({ auth }) {
         const options = {
             method: 'POST',
             headers: {
-                'X-CSRFToken': Cookies.get('csrftoekn'),
+                'X-CSRFToken': Cookies.get('csrftoken'),
             },
             body: formData,
         }
 
-        fetch('/api/v1/articles/', options);
+        fetch('/api/v1/articles/user/', options);
         setTitle('');
         setText('');
         setSummary('');

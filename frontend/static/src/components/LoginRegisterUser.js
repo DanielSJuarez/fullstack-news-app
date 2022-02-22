@@ -151,6 +151,7 @@ function LoginRegisterUser({ handleError, auth, setAuth }) {
 
     const createAccount = (
         <div>
+        <h3>New Article</h3>
         <form onSubmit={handleCreateSubmit}>
             <div>
                 <label htmlFor='username'>Username</label>
