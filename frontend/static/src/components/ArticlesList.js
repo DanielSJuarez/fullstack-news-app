@@ -5,6 +5,7 @@ import ArticleDetail from './ArticleDetail';
 function ArticlesList() {
     const [articles, setArticles] = useState(null)
     const [contentView, setContentView] = useState(false)
+    const [getTitle, setGetTitle] = useState('')
 
     const handleError = (err) => {
         console.log(err);
@@ -28,13 +29,21 @@ function ArticlesList() {
         return <div>Fetching article data....</div>
     }
 
+    const articleFilter = articles.filter(article => (
+        article.title === getTitle          
+    ))
+
+    const articleDetaillHTML = articleFilter.map(article => (
+        <ArticleDetail key={article.id} {...article} setContentView={setContentView}/>
+    ))
+    
     const articlesHTML = articles.map(article => (
-        <ArticlePreview key={article.id} {...article} setContentView={setContentView}/>
+        <ArticlePreview key={article.id} {...article} setContentView={setContentView} setGetTitle={setGetTitle} getTitle={getTitle}/>
     ));
 
     return (
         <div>
-            {contentView ? <ArticleDetail/> : articlesHTML}
+            {contentView ? articleDetaillHTML : articlesHTML}
         </div>
     )
 }

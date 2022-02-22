@@ -1,4 +1,11 @@
-function ArticlePreview({title, image, summary, name, setContentView}){
+function ArticlePreview({title, image, summary, name, setGetTitle ,setContentView}){
+
+    const getArticle = (e) => {
+        const findTitle = e.target.value
+        setGetTitle('')
+        setGetTitle(findTitle)
+        setContentView(true)
+    }
 
     return(
         <article className='col'>
@@ -7,7 +14,7 @@ function ArticlePreview({title, image, summary, name, setContentView}){
                 <img src={image} alt={name} />
             </div>
             <p>{summary}</p>
-            <button onClick={()=> setContentView(true)}>Read More ...</button>
+            <button value={title} onClick={getArticle}>Read More ...</button>
         </article>
     )
 }
