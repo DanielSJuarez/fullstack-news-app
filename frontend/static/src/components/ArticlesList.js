@@ -2,14 +2,10 @@ import { useState, useEffect } from 'react'
 import ArticlePreview from './ArticlePreview';
 import ArticleDetail from './ArticleDetail';
 
-function ArticlesList() {
+function ArticlesList({handleError}) {
     const [articles, setArticles] = useState(null)
     const [contentView, setContentView] = useState(false)
     const [getTitle, setGetTitle] = useState('')
-
-    const handleError = (err) => {
-        console.log(err);
-    }
 
     useEffect(() => {
         const getArticles = async () => {

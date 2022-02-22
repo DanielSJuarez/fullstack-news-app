@@ -4,14 +4,18 @@ import CreateArticleView from './components/CreateArticleView';
 import LoginRegisterUser from './components/LoginRegisterUser';
 
 function App() {
+
+  const handleError = (err) => {
+    console.log(err);
+}
   
   return (
 
     <div className="App">
-      <LoginRegisterUser/>
+      <LoginRegisterUser handleError={handleError}/>
       <h1>Daily Taco News</h1>
       <CreateArticleView />
-      <ArticlesList/>
+      <ArticlesList handleError={handleError}/>
     </div>
   );
 }
