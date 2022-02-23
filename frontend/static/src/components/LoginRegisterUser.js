@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import Cookies from 'js-cookie';
 
-function LoginRegisterUser({ handleError, auth, setAuth }) {
+function LoginRegisterUser({ handleError, auth, setAuth, state, setState}) {
 
     const [login, setLogin] = useState(false)
     const [register, setRegister] = useState(false)
-    const [state, setState] = useState({
-        username: '',
-        password: ''
-    })
+    // const [state, setState] = useState({
+    //     username: '',
+    //     password: ''
+    // })
     const [newState, setNewState] = useState({
         username: '',
         email: '',

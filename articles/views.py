@@ -10,8 +10,7 @@ class ArticleListAPIView(generics.ListAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-
-    
+  
 class ArticleAuthorListAPIView(generics.ListCreateAPIView):
     permission_classes = (IsAuthorOrReadOnly,)
     serializer_class = ArticleAuthorSerializer

@@ -7,6 +7,11 @@ import LoginRegisterUser from './components/LoginRegisterUser';
 
 function App() {
   const [auth, setAuth] = useState(!!Cookies.get('Authorization'));
+  const [articles, setArticles] = useState(null)
+  const [state, setState] = useState({
+    username: '',
+    password: ''
+})
 
   const handleError = (err) => {
     console.log(err);
@@ -15,10 +20,10 @@ function App() {
   return (
 
     <div className="App">
-      <LoginRegisterUser handleError={handleError} auth={auth} setAuth={setAuth} />
+      <LoginRegisterUser handleError={handleError} auth={auth} setAuth={setAuth} state={state} setState={setState} />
       <h1>Daily Taco News</h1>
-      <ArticlesList handleError={handleError} />
-      <CreateArticleView auth={auth} />
+      <ArticlesList handleError={handleError} articles={articles} setArticles={setArticles}/>
+      <CreateArticleView auth={auth} handleError={handleError}/>
     </div>
   );
 }

@@ -1,13 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
+import AuthorDetail from './AuthorDetail';
 
-function CreateArticleView({ auth }) {
+function CreateArticleView({ auth, handleError}) {
 
     const [addImage, setAddImage] = useState(null);
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
     const [summary, setSummary] = useState('');
     const [preview, setPreview] = useState('');
+    const [modeView, setModeView] = useState(false)
+    const [authorView, setAuthorView] = useState(null)
+
+    useEffect(() => {
+        const getAuthorArticles = async () => {
+            const response = await fetch('/api/v1/articles/user').catch(handleError);
+
+            if (!response.ok) {
+                throw new Error('Netword response was not OK!')
+            } else {
+                const data = await response.json();
+                setAuthorView(data);
+            }
+        }
+        getAuthorArticles();
+    }, []);
+
+    if (!authorView) {
+        return <div>Fetching your article data....</div>
+    }
 
     const handleTitleInput = e => {
         const addTitle = e.target.value;
@@ -60,8 +81,22 @@ function CreateArticleView({ auth }) {
         setPreview('');
     }
 
+    const authorArticleList = authorView.map(article => (
+        <AuthorDetail key={article.id} {...article} setModeView={setModeView}/>
+
+    ))
+
+    const authorArticleListView = (
+        <>
+        {authorArticleList}
+        <button onClick={() => setModeView(false)}>Create Content</button> 
+        </>
+    )
+
+
     const createArticle = (
         <div>
+            <button type='button' onClick={() => setModeView(true)}>View Your Content</button>
             <p>Add Your Article</p>
             <form onSubmit={handleSubmit}>
                 <div>
@@ -82,9 +117,11 @@ function CreateArticleView({ auth }) {
 
     return (
         <div>
-            {auth ? createArticle : noneRegisterUser}
+            {auth ? modeView ? authorArticleListView : createArticle : noneRegisterUser}
         </div>
     )
 }
 
 export default CreateArticleView
+
+// modeView ? authorArticleList :

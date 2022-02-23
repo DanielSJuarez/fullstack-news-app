@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import ArticlePreview from './ArticlePreview';
 import ArticleDetail from './ArticleDetail';
 
-function ArticlesList({handleError}) {
-    const [articles, setArticles] = useState(null)
+function ArticlesList({handleError, articles, setArticles}) {
+    
     const [contentView, setContentView] = useState(false)
     const [getTitle, setGetTitle] = useState('')
 
