@@ -15,9 +15,18 @@ function AuthorDetail({ title, image, text, id, deleteMessage, setGetId}) {
     // </article>
     //     )
     
-        // const editMode = (
-           // <button onClick={() => setEdit(false)}>save</button>
-       // )
+    //     const editMode = (
+    //         <form onSubmit={handleEdit}>
+    //             <div>
+    //                 <input type='text' name='editTitle' placeholder='title' onChange={newHandleTitleInput} value={title}></input>
+    //                 <input type='text' name='editSummary' placeholder='summary' onChange={newHandleSummaryInput} value={summary}></input>
+    //                 <input type='text' name='editText' placeholder='text' onChange={newHandleTextInput} value={text}></input>
+    //                 <input type='file' name='editArticleImage' onChange={newHandleImage} />
+    //                 {preview && <img src={preview} alt='' />}
+    //             </div>
+    //             <button type='submit' onClick={() => setEdit(false)}>save</button>
+    //        </form>
+    //    )
 
        const remove = (e) => {
             setGetId(e.target.value)
