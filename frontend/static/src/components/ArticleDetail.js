@@ -10,6 +10,7 @@ function ArticleDetail({ title, image, text, setContentView }) {
                 <img src={image} alt={title} />
             </div>
             <p>{text}</p>
+            
         </article>
     )
 }

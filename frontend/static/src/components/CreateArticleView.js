@@ -11,6 +11,8 @@ function CreateArticleView({ auth, handleError}) {
     const [preview, setPreview] = useState('');
     const [modeView, setModeView] = useState(false)
     const [authorView, setAuthorView] = useState(null)
+    const [phase, setPhase] = useState('')
+    const [getID, setGetId] = useState('')
 
     useEffect(() => {
         const getAuthorArticles = async () => {
@@ -65,6 +67,7 @@ function CreateArticleView({ auth, handleError}) {
         formData.append('text', text)
         formData.append('summary', summary)
         formData.append('image', addImage);
+        formData.append('phase', phase);
 
         const options = {
             method: 'POST',
@@ -79,10 +82,35 @@ function CreateArticleView({ auth, handleError}) {
         setText('');
         setSummary('');
         setPreview('');
+        setPhase('');
     }
+    
+    const deleteMessage = async () => {
+
+        const options = {
+          method: 'DELETE',
+          headers: {
+            'Content-type': 'application/json',
+            'X-CSRFToken': Cookies.get('csrftoken')
+          },
+        }
+    
+        const response = await fetch(`/api/v1/articles/${getID}/user/`, options).catch(handleError);
+    
+        if (!response.ok) {
+          throw new Error('Network response was not OK');
+        }
+        const viewAfterDelete = authorView.filter((article) => {
+          if (article.id !== getID){
+              return {...article}
+          }
+        })
+        setAuthorView(viewAfterDelete)
+        setGetId('')
+      }
 
     const authorArticleList = authorView.map(article => (
-        <AuthorDetail key={article.id} {...article} setModeView={setModeView}/>
+        <AuthorDetail key={article.id} {...article} setModeView={setModeView} deleteMessage={deleteMessage} setGetId={setGetId}/>
 
     ))
 
@@ -92,7 +120,6 @@ function CreateArticleView({ auth, handleError}) {
         <button onClick={() => setModeView(false)}>Create Content</button> 
         </>
     )
-
 
     const createArticle = (
         <div>
@@ -106,7 +133,8 @@ function CreateArticleView({ auth, handleError}) {
                     <input type='file' name='articleImage' onChange={handleImage} />
                     {preview && <img src={preview} alt='' />}
                 </div>
-                <button type='submit'>Submit</button>
+                <button type='submit' onClick={()=> setPhase('DRT')}>Save</button>
+                <button type='submit' onClick={()=> setPhase('SUB')}>Save/Submit</button>
             </form>
         </div>
     )
@@ -123,5 +151,3 @@ function CreateArticleView({ auth, handleError}) {
 }
 
 export default CreateArticleView
-
-// modeView ? authorArticleList :
