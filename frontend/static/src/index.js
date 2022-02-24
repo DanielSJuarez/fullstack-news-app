@@ -10,17 +10,20 @@ import CreateArticle from './components/CreateArticle'
 import Login from './components/Login'
 import Register from './components/Register'
 import AuthorArticleView from './components/AuthorArticleView'
+import AdminList from './components/AdminList'
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App />}>
+          <Route path='' element={<ArticlesList/>}/>
           <Route path='articles' element={<AuthorArticleView/>}/>
           <Route path='create' element={<CreateArticle/>}/>
           <Route path='popular' element={<ArticlesList/>}/>
           <Route path='login' element={<Login/>}/>
           <Route path='register' element={<Register/>}/>
+          <Route path='admin' element={<AdminList/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Cookies, { attributes } from 'js-cookie';
+import AdminDetail from './AdminDetail';
 
 function AdminList() {
     const [adminView, setAdminView] = useState(null)
@@ -26,14 +26,51 @@ function AdminList() {
         return <div>Fetching site data....</div>
     }
 
-    const siteArticleList = adminView.map(article => (
-        <AdminDetail key={article.id} {...article} getId={getId} setModeView={setModeView} deleteArticle={deleteArticle} setGetId={setGetId} editArticle={editArticle} handleImage={handleImage} handleSummaryInput={handleSummaryInput} handleTitleInput={handleTitleInput} handleTextInput={handleTextInput}/>
+    const adminFilterSUB = adminView.filter(article => (
+        article.phase === 'SUB'
+    ))
+
+    const adminSubmittedList = adminFilterSUB.map(article => (
+        <AdminDetail key={article.id} {...article} handleError={handleError} adminView={adminView} setAdminView={setAdminView}/>
+    ))
+
+    const adminFilterREJ = adminView.filter(article => (
+        article.phase === 'REJ'
+    ))
+
+    const adminRejectedList = adminFilterREJ.map(article => (
+        <AdminDetail key={article.id} {...article} handleError={handleError} adminView={adminView} setAdminView={setAdminView}/> 
+    ))
+
+    const adminFilterPUB = adminView.filter(article => (
+        article.phase === 'PUB'
+    ))
+
+    const adminPublishedList = adminFilterPUB.map(article => (
+        <AdminDetail key={article.id} {...article} handleError={handleError} adminView={adminView} setAdminView={setAdminView}/> 
+    ))
+
+    const adminFilterARC = adminView.filter(article => (
+        article.phase === 'ARC'
+    ))
+
+    const adminArchievedList = adminFilterARC.map(article => (
+        <AdminDetail key={article.id} {...article} handleError={handleError} adminView={adminView}  setAdminView={setAdminView}/>    
     ))
 
     return (
-       <div>
-           {siteArticleList}
-       </div> 
+
+        <div>
+            <h2>Submitted</h2>
+                {adminSubmittedList}
+            <h2>Published</h2>
+                {adminPublishedList}
+            <h2>Rejected</h2>
+                {adminRejectedList}   
+            <h2>Archieved</h2>
+                {adminArchievedList}
+        </div>
+
     )
 }
 export default AdminList;

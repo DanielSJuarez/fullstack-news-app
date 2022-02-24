@@ -3,7 +3,6 @@ import ArticlePreview from './ArticlePreview';
 import ArticleDetail from './ArticleDetail';
 
 function ArticlesList({handleError}) {
-    // {handleError, articles, setArticles}
     const [contentView, setContentView] = useState(false)
     const [getTitle, setGetTitle] = useState('')
     const [articles, setArticles] = useState(null)

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ArticleListAPIView, ArticleAuthorListAPIView, ArticleApproveListAPIView, ArticleDetailChangeAPIView,ArticleApproveChangeAPIView
+from .views import ArticleListAPIView, ArticleAuthorListAPIView, ArticleApproveListAPIView, ArticleDetailChangeAPIView, ArticleApproveChangeAPIView
 
 urlpatterns = [
     path('articles/<int:pk>/user/', ArticleDetailChangeAPIView.as_view()),

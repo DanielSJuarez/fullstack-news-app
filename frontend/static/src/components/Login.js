@@ -3,13 +3,11 @@ import Cookies from 'js-cookie';
 import { useOutletContext } from "react-router-dom";
 
 function Login(props){
-    const [auth, setAuth, navigate] = useOutletContext();
-    
+    const [auth, setAuth, navigate, admin, setAdmin] = useOutletContext();
     const [state, setState] = useState({
         username: '',
         password: ''
     })
-
     const handleError = (err) => {
         console.log(err);
       }
@@ -40,8 +38,13 @@ function Login(props){
                 username: '',
                 password: ''
             })
+            if (data.is_superuser == true) {
+                setAdmin(true)
+                navigate('/admin')
+            } else {
+                navigate('/articles')
+            }      
         }
-        navigate('/articles')
     }
 
 
