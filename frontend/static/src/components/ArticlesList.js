@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react'
 import ArticlePreview from './ArticlePreview';
 import ArticleDetail from './ArticleDetail';
 
-function ArticlesList({handleError, articles, setArticles}) {
-    
+function ArticlesList({handleError}) {
+    // {handleError, articles, setArticles}
     const [contentView, setContentView] = useState(false)
     const [getTitle, setGetTitle] = useState('')
+    const [articles, setArticles] = useState(null)
 
     useEffect(() => {
         const getArticles = async () => {
@@ -44,3 +45,4 @@ function ArticlesList({handleError, articles, setArticles}) {
     )
 }
 export default ArticlesList
+

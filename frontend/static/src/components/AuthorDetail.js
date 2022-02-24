@@ -1,49 +1,44 @@
-import {useState} from 'react'
-function AuthorDetail({ title, image, text, id, deleteMessage, setGetId}) {
+import { set } from 'js-cookie'
+import { useState } from 'react'
+function AuthorDetail({ title, image, text, id, getId, preview, deleteArticle, setGetId, editArticle, handleImage, handleSummaryInput, handleTextInput, handleTitleInput }) {
     const [edit, setEdit] = useState(false)
 
-    // const displayMode = (
-    //     <article className='col'>
-            
-    //     <h3>{title}</h3>
-    //     <div>
-    //         <img src={image} alt={title} />
-    //     </div>
-    //     <p>{text}</p>
-    //     <button onClick={() => setEdit(true)}>Edit</button>
-    //     <button onClick={deleteMessage}>Delete</button>
-    // </article>
-    //     )
-    
-    //     const editMode = (
-    //         <form onSubmit={handleEdit}>
-    //             <div>
-    //                 <input type='text' name='editTitle' placeholder='title' onChange={newHandleTitleInput} value={title}></input>
-    //                 <input type='text' name='editSummary' placeholder='summary' onChange={newHandleSummaryInput} value={summary}></input>
-    //                 <input type='text' name='editText' placeholder='text' onChange={newHandleTextInput} value={text}></input>
-    //                 <input type='file' name='editArticleImage' onChange={newHandleImage} />
-    //                 {preview && <img src={preview} alt='' />}
-    //             </div>
-    //             <button type='submit' onClick={() => setEdit(false)}>save</button>
-    //        </form>
-    //    )
+    const change = (e) => {
+        e.preventDefault(); 
+        editArticle(id)
+        setEdit(false)
+    }
 
-       const remove = (e) => {
-            setGetId(e.target.value)
-            deleteMessage()
-       }
-    
-    return (
+    const displayMode = (
         <article className='col'>
-            
-        <h3>{title}</h3>
-        <div>
-            <img src={image} alt={title} />
-        </div>
-        <p>{text}</p>
-        <button type='button' onClick={() => setEdit(true)}>Edit</button>
-        <button type='button' value={id} onClick={remove}>Delete</button>
+
+            <h3>{title}</h3>
+            <div>
+                <img src={image} alt={title} />
+            </div>
+            <p>{text}</p>
+            <button onClick={() => setEdit(true)}>Edit</button>
+            <button onClick={() => deleteArticle(id)}>Delete</button>
         </article>
+    )
+
+    const editMode = (
+        <form onSubmit={change}>
+            <div>
+                <input type='text' name='editTitle' placeholder='title' onChange={handleTitleInput} ></input>
+                <input type='text' name='editSummary' placeholder='summary' onChange={handleSummaryInput}></input>
+                <input type='text' name='editText' placeholder='text' onChange={handleTextInput}></input>
+                <input type='file' name='editArticleImage' onChange={handleImage} />
+                {preview && <img src={preview} alt='' />}
+            </div>
+            <button type='submit'>save</button>
+        </form>
+    )
+
+    return (
+        <div>
+            { edit ? editMode : displayMode }
+        </div>
     )
 }
 export default AuthorDetail;

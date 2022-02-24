@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
+import Cookies, { attributes } from 'js-cookie';
 import AuthorDetail from './AuthorDetail';
+import { useOutletContext } from "react-router-dom";
 
-function CreateArticleView({ auth, handleError}) {
-
+function AuthorArticleView({props}) {
+    const [auth, setAuth] = useOutletContext();
     const [addImage, setAddImage] = useState(null);
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
@@ -12,7 +13,11 @@ function CreateArticleView({ auth, handleError}) {
     const [modeView, setModeView] = useState(false)
     const [authorView, setAuthorView] = useState(null)
     const [phase, setPhase] = useState('')
-    const [getID, setGetId] = useState('')
+    const [getId, setGetId] = useState('')
+
+    const handleError = (err) => {
+        console.log(err);
+      }
 
     useEffect(() => {
         const getAuthorArticles = async () => {
@@ -83,10 +88,12 @@ function CreateArticleView({ auth, handleError}) {
         setSummary('');
         setPreview('');
         setPhase('');
+        setAddImage('')
     }
-    
-    const deleteMessage = async () => {
 
+  
+    const deleteArticle = async (id) => {
+    
         const options = {
           method: 'DELETE',
           headers: {
@@ -95,59 +102,76 @@ function CreateArticleView({ auth, handleError}) {
           },
         }
     
-        const response = await fetch(`/api/v1/articles/${getID}/user/`, options).catch(handleError);
+        const response = await fetch(`/api/v1/articles/${id}/user/`, options).catch(handleError);
     
         if (!response.ok) {
           throw new Error('Network response was not OK');
         }
+        
         const viewAfterDelete = authorView.filter((article) => {
-          if (article.id !== getID){
-              return {...article}
-          }
-        })
+            return article.id !== id
+        });
         setAuthorView(viewAfterDelete)
+      }
+    
+      const editArticle = async (id) => {
+
+        const updatedArticle = {
+            title,
+            text,
+            summary,
+            image: addImage
+        }
+
+        const formData = new FormData();
+        for(const [key, value] of Object.entries(updatedArticle)) {
+            if(value){
+                formData.append(key, value)
+            }
+        }
+
+        const options = {
+          method: 'PATCH',
+          headers: {
+            'X-CSRFToken': Cookies.get('csrftoken')
+          },
+          body: formData
+        }
+    
+        const response = await fetch(`/api/v1/articles/${id}/user/`, options).catch(handleError);
+    
+        if (!response.ok) {
+          throw new Error('Network response was not OK');
+        }
+
+        const data = await response.json();
+    
+        const updateEditView = authorView.map((article) => {
+            if (article.id == id){
+                return data
+            } else {
+                return article
+            }
+        })
+        setAuthorView(updateEditView)
         setGetId('')
+        setTitle('');
+        setText('');
+        setSummary('');
+        setPreview('');
+        setAddImage('')
+  
       }
 
     const authorArticleList = authorView.map(article => (
-        <AuthorDetail key={article.id} {...article} setModeView={setModeView} deleteMessage={deleteMessage} setGetId={setGetId}/>
-
+        <AuthorDetail key={article.id} {...article} getId={getId} setModeView={setModeView} deleteArticle={deleteArticle} setGetId={setGetId} editArticle={editArticle} handleImage={handleImage} handleSummaryInput={handleSummaryInput} handleTitleInput={handleTitleInput} handleTextInput={handleTextInput}/>
     ))
-
-    const authorArticleListView = (
-        <>
-        {authorArticleList}
-        <button onClick={() => setModeView(false)}>Create Content</button> 
-        </>
-    )
-
-    const createArticle = (
-        <div>
-            <button type='button' onClick={() => setModeView(true)}>View Your Content</button>
-            <p>Add Your Article</p>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <input type='text' name='title' placeholder='title' onChange={handleTitleInput} value={title}></input>
-                    <input type='text' name='summary' placeholder='summary' onChange={handleSummaryInput} value={summary}></input>
-                    <input type='text' name='text' placeholder='text' onChange={handleTextInput} value={text}></input>
-                    <input type='file' name='articleImage' onChange={handleImage} />
-                    {preview && <img src={preview} alt='' />}
-                </div>
-                <button type='submit' onClick={()=> setPhase('DRT')}>Save</button>
-                <button type='submit' onClick={()=> setPhase('SUB')}>Save/Submit</button>
-            </form>
-        </div>
-    )
-
-    const noneRegisterUser = (
-        <div>Sign in or create an account to post your own content...</div>
-    )
 
     return (
         <div>
-            {auth ? modeView ? authorArticleListView : createArticle : noneRegisterUser}
+            {authorArticleList}
         </div>
     )
 }
 
-export default CreateArticleView
+export default AuthorArticleView

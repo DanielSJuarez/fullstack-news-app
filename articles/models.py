@@ -14,7 +14,7 @@ class Article(models.Model):
     )
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=255, null=True)
-    text = models.TextField()
+    text = models.TextField(blank=True)
     summary = models.CharField(max_length=255, null=True)
     image = models.ImageField(upload_to='articles/', null=True)
     phase = models.CharField(max_length=3, choices=PHASES, default='DRT')

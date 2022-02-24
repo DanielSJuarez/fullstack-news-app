@@ -37,11 +37,7 @@ class ArticleDetailChangeAPIView(generics.RetrieveUpdateDestroyAPIView):
        
         user = self.request.user
         return Article.objects.filter(author=user)
-
-    # def perform_create(self, serializer):
-    #     serializer.save(author=self.request.user)
         
-
 class ArticleApproveChangeAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAdminUser,)
     queryset = Article.objects.all()
