@@ -10,7 +10,7 @@ function AdminList() {
 
     useEffect(() => {
         const getSiteArticles = async () => {
-            const response = await fetch('/api/v1/articles/user').catch(handleError);
+            const response = await fetch('/api/v1/articles/admin').catch(handleError);
 
             if (!response.ok) {
                 throw new Error('Netword response was not OK!')
@@ -26,13 +26,13 @@ function AdminList() {
         return <div>Fetching site data....</div>
     }
 
-    const sideArticleList = authorView.map(article => (
+    const siteArticleList = adminView.map(article => (
         <AdminDetail key={article.id} {...article} getId={getId} setModeView={setModeView} deleteArticle={deleteArticle} setGetId={setGetId} editArticle={editArticle} handleImage={handleImage} handleSummaryInput={handleSummaryInput} handleTitleInput={handleTitleInput} handleTextInput={handleTextInput}/>
     ))
 
     return (
        <div>
-           {sideArticleList}
+           {siteArticleList}
        </div> 
     )
 }
