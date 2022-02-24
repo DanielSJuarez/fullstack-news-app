@@ -13,24 +13,15 @@ import Register from './components/Register';
 function App() {
   const navigate = useNavigate()
   const [auth, setAuth] = useState(!!Cookies.get('Authorization'));
- 
-//   const [state, setState] = useState({
-//     username: '',
-//     password: ''
-// })
 
   return (
 
     <div className="App">
       <Header auth={auth} setAuth={setAuth} navigate={navigate}/>
       <h1>Daily Taco News</h1>
-      {/* <ArticlesList handleError={handleError} articles={articles} setArticles={setArticles}/> */}
-      <Outlet context={[navigate, auth , setAuth]}/>
-      {/* <CreateArticleView auth={auth} handleError={handleError}/> */}
+      <Outlet context={[auth, setAuth, navigate]}/>
     </div>
   );
 }
 
 export default App;
-// , handleError, articles, setArticles, setAuth, state, setState
-//handleError={handleError} auth={auth} setAuth={setAuth} state={state} setState={setState}

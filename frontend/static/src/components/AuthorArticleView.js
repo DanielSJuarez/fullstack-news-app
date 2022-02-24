@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react';
 import Cookies, { attributes } from 'js-cookie';
 import AuthorDetail from './AuthorDetail';
-import { useOutletContext } from "react-router-dom";
+import DraftDetail from './DraftDetail';
 
 function AuthorArticleView({props}) {
-    const [auth, setAuth] = useOutletContext();
     const [addImage, setAddImage] = useState(null);
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
     const [summary, setSummary] = useState('');
     const [preview, setPreview] = useState('');
-    const [modeView, setModeView] = useState(false)
     const [authorView, setAuthorView] = useState(null)
     const [phase, setPhase] = useState('')
     const [getId, setGetId] = useState('')
@@ -64,33 +62,6 @@ function AuthorArticleView({props}) {
         }
         reader.readAsDataURL(file);
     }
-
-    const handleSubmit = e => {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append('title', title)
-        formData.append('text', text)
-        formData.append('summary', summary)
-        formData.append('image', addImage);
-        formData.append('phase', phase);
-
-        const options = {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': Cookies.get('csrftoken'),
-            },
-            body: formData,
-        }
-
-        fetch('/api/v1/articles/user/', options);
-        setTitle('');
-        setText('');
-        setSummary('');
-        setPreview('');
-        setPhase('');
-        setAddImage('')
-    }
-
   
     const deleteArticle = async (id) => {
     
@@ -120,7 +91,8 @@ function AuthorArticleView({props}) {
             title,
             text,
             summary,
-            image: addImage
+            image: addImage,
+            phase,
         }
 
         const formData = new FormData();
@@ -160,16 +132,62 @@ function AuthorArticleView({props}) {
         setSummary('');
         setPreview('');
         setAddImage('')
+        setPhase('');
   
       }
 
-    const authorArticleList = authorView.map(article => (
-        <AuthorDetail key={article.id} {...article} getId={getId} setModeView={setModeView} deleteArticle={deleteArticle} setGetId={setGetId} editArticle={editArticle} handleImage={handleImage} handleSummaryInput={handleSummaryInput} handleTitleInput={handleTitleInput} handleTextInput={handleTextInput}/>
+    const filterDRT = authorView.filter(article => (
+        article.phase === 'DRT'
+    ))
+
+    const authorDraftList = filterDRT.map(article => (
+        <DraftDetail key={article.id} {...article} getId={getId}  deleteArticle={deleteArticle} setGetId={setGetId} editArticle={editArticle} handleImage={handleImage} handleSummaryInput={handleSummaryInput} handleTitleInput={handleTitleInput} handleTextInput={handleTextInput} setPhase={setPhase}/>
+    ))
+
+    const filterSUB = authorView.filter(article => (
+        article.phase === 'SUB'
+    ))
+
+    const authorSubmittedList = filterSUB.map(article => (
+        <AuthorDetail key={article.id} {...article} getId={getId}  deleteArticle={deleteArticle} setGetId={setGetId} editArticle={editArticle} handleImage={handleImage} handleSummaryInput={handleSummaryInput} handleTitleInput={handleTitleInput} handleTextInput={handleTextInput}/>
+    ))
+
+    const filterREJ = authorView.filter(article => (
+        article.phase === 'REJ'
+    ))
+
+    const authorRejectedList = filterREJ.map(article => (
+        <AuthorDetail key={article.id} {...article} getId={getId}  deleteArticle={deleteArticle} setGetId={setGetId} editArticle={editArticle} handleImage={handleImage} handleSummaryInput={handleSummaryInput} handleTitleInput={handleTitleInput} handleTextInput={handleTextInput}/>
+    ))
+
+    const filterPUB = authorView.filter(article => (
+        article.phase === 'PUB'
+    ))
+
+    const authorPublishedList = filterPUB.map(article => (
+        <AuthorDetail key={article.id} {...article} getId={getId}  deleteArticle={deleteArticle} setGetId={setGetId} editArticle={editArticle} handleImage={handleImage} handleSummaryInput={handleSummaryInput} handleTitleInput={handleTitleInput} handleTextInput={handleTextInput}/>
+    ))
+
+    const filterARC = authorView.filter(article => (
+        article.phase === 'ARC'
+    ))
+
+    const authorArchievedList = filterARC.map(article => (
+        <AuthorDetail key={article.id} {...article} getId={getId}  deleteArticle={deleteArticle} setGetId={setGetId} editArticle={editArticle} handleImage={handleImage} handleSummaryInput={handleSummaryInput} handleTitleInput={handleTitleInput} handleTextInput={handleTextInput}/>
     ))
 
     return (
         <div>
-            {authorArticleList}
+            <h2>Draft</h2>
+                {authorDraftList}
+            <h2>Submitted</h2>
+                {authorSubmittedList}
+            <h2>Published</h2>
+                {authorPublishedList}
+            <h2>Rejected</h2>
+                {authorRejectedList}   
+            <h2>Archieved</h2>
+                {authorArchievedList}
         </div>
     )
 }

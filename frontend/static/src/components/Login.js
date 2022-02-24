@@ -3,7 +3,8 @@ import Cookies from 'js-cookie';
 import { useOutletContext } from "react-router-dom";
 
 function Login(props){
-    const [auth, setAuth] = useOutletContext();
+    const [auth, setAuth, navigate] = useOutletContext();
+    
     const [state, setState] = useState({
         username: '',
         password: ''
@@ -40,7 +41,7 @@ function Login(props){
                 password: ''
             })
         }
-        props.navigate('/articles')
+        navigate('/articles')
     }
 
 
