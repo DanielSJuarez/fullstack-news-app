@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import ArticlePreview from './ArticlePreview';
 import ArticleDetail from './ArticleDetail';
 
-function ArticlesList({handleError}) {
+function ArticlesListTrend({handleError}) {
     const [contentView, setContentView] = useState(false)
     const [getTitle, setGetTitle] = useState('')
     const [articles, setArticles] = useState(null)
@@ -32,8 +32,12 @@ function ArticlesList({handleError}) {
     const articleDetaillHTML = articleFilter.map(article => (
         <ArticleDetail key={article.id} {...article} setContentView={setContentView}/>
     ))
+
+    const articleFilterCatagory = articles.filter(article => (
+        article.catagory === 'TRD'          
+    ))
     
-    const articlesHTML = articles.map(article => (
+    const articlesHTML = articleFilterCatagory.map(article => (
         <ArticlePreview key={article.id} {...article} setContentView={setContentView} setGetTitle={setGetTitle} getTitle={getTitle}/>
     ));
 
@@ -43,5 +47,5 @@ function ArticlesList({handleError}) {
         </div>
     )
 }
-export default ArticlesList
+export default ArticlesListTrend
 

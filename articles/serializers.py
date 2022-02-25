@@ -6,7 +6,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     creator = serializers.ReadOnlyField(source = 'author.username')
     class Meta:
         model = Article
-        fields = ('title', 'text', 'summary', 'image', 'creator')
+        fields = ('title', 'text', 'summary', 'image', 'creator', 'catagory')
 
 class ArticleAuthorSerializer(serializers.ModelSerializer):
     creator = serializers.ReadOnlyField(source = 'author.username')
@@ -18,6 +18,6 @@ class ArticleAdminSerializer(serializers.ModelSerializer):
     creator = serializers.ReadOnlyField(source = 'author.username')
     class Meta:
         model = Article
-        fields = ('title', 'text', 'summary', 'image', 'creator', 'phase', 'id') 
+        fields = ('title', 'text', 'summary', 'image', 'creator', 'phase', 'id', 'catagory') 
 
 

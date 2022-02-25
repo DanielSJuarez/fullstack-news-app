@@ -4,6 +4,8 @@ import Cookies from 'js-cookie';
 function AdminDetail({id, title, text, summary, image, handleError , setAdminView , adminView}){
     const [status, setStatus] = useState(false)
     const [newPhase, setNewPhase] = useState('')
+    const [section, setSection] = useState(false)
+    const [newCatagory, setNewCatagory] = useState('')
 
         const updateArticleStatus = async (e) => {
 
@@ -47,6 +49,48 @@ function AdminDetail({id, title, text, summary, image, handleError , setAdminVie
             setNewPhase('')
           }
 
+          const updateArticleCatagory = async (e) => {
+
+            const updatedCatagory = {
+                catagory: e.target.value
+            }
+    
+            const formData = new FormData();
+            for(const [key, value] of Object.entries(updatedCatagory)) {
+                if(value){
+                    formData.append(key, value)
+                }
+            }
+    
+            const options = {
+              method: 'PATCH',
+              headers: {
+                'X-CSRFToken': Cookies.get('csrftoken')
+              },
+              body: formData
+            }
+        
+            const response = await fetch(`/api/v1/articles/${id}/admin/`, options).catch(handleError);
+        
+            if (!response.ok) {
+              throw new Error('Network response was not OK');
+            }
+    
+            const data = await response.json();
+
+            const updateArticleStatus = adminView.map((article) => {
+                if (article.id == id){
+                    return data
+                } else {
+                    return article
+                }
+            })
+        
+            setAdminView(updateArticleStatus)
+            setSection(false)
+            setNewCatagory('')
+          }
+
         
         
 
@@ -64,6 +108,20 @@ function AdminDetail({id, title, text, summary, image, handleError , setAdminVie
         </div>
     )
 
+    const catagoryView = (
+        <button onClick={() => setSection(true)}>Change Article Catagory</button>
+    )
+
+
+    const changeCatagoryView = (
+        <div>
+            <button value='POP' onClick={updateArticleCatagory}>Popular</button>
+            <button value='TRD' onClick={updateArticleCatagory}>Trending</button>
+            <button value='ALL' onClick={updateArticleCatagory}>All</button> 
+            <button onClick={() => setSection(false)}>Back</button> 
+        </div>
+    )
+
 
     return(
         <article className='col'>
@@ -75,6 +133,7 @@ function AdminDetail({id, title, text, summary, image, handleError , setAdminVie
             <p>{summary}</p>
             <p>{text}</p>
             {status ? changeSatusView : listView}
+            {section ? changeCatagoryView : catagoryView}
         </article>
     )
 }

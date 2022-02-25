@@ -5,22 +5,26 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import ArticlesList from './components/ArticlesList';
+import ArticlesListPopular from './components/ArticlesListPopular';
 import CreateArticle from './components/CreateArticle'
 import Login from './components/Login'
 import Register from './components/Register'
 import AuthorArticleView from './components/AuthorArticleView'
 import AdminList from './components/AdminList'
+import ArticlesListTrend from './components/ArticlesListTrend'
+import ArticlesListAll from './components/ArticlesListAll'
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App />}>
-          <Route path='' element={<ArticlesList/>}/>
+          <Route path='' element={<ArticlesListPopular/>}/>
           <Route path='articles' element={<AuthorArticleView/>}/>
           <Route path='create' element={<CreateArticle/>}/>
-          <Route path='popular' element={<ArticlesList/>}/>
+          <Route path='popular' element={<ArticlesListPopular/>}/>
+          <Route path='trending' element={<ArticlesListTrend/>}/>
+          <Route path='all' element={<ArticlesListAll/>}/>
           <Route path='login' element={<Login/>}/>
           <Route path='register' element={<Register/>}/>
           <Route path='admin' element={<AdminList/>}/>

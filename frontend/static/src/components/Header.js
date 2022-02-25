@@ -44,6 +44,12 @@ function Header(props) {
                 <NavLink to='/popular'>Popular Articles</NavLink>
             </li>
             <li>
+                <NavLink to='/trending'>Trending Articles</NavLink>
+            </li>
+            <li>
+                <NavLink to='/all'>Articles</NavLink>
+            </li>
+            <li>
                 <button type='button' name='logout' onClick={handleLogout}>Sign Out</button>
             </li>
         </ul>
@@ -54,6 +60,12 @@ function Header(props) {
         <ul>
             <li>
                 <NavLink to='/popular'>Popular Articles</NavLink>
+            </li>
+            <li>
+                <NavLink to='/trending'>Trending Articles</NavLink>
+            </li>
+            <li>
+                <NavLink to='/all'>Articles</NavLink>
             </li>
             <li>
                 <Link to='/login'>Login</Link>
@@ -68,6 +80,12 @@ function Header(props) {
         <ul>
             <li>
                 <NavLink to='/popular'>Popular Articles</NavLink>
+            </li>
+            <li>
+                <NavLink to='/trending'>Trending Articles</NavLink>
+            </li>
+            <li>
+                <NavLink to='/all'>Articles</NavLink>
             </li>
             <li>
                 <NavLink to='/create'>Create Article</NavLink>
