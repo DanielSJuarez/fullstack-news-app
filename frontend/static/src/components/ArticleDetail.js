@@ -1,16 +1,13 @@
 function ArticleDetail({ title, image, text, setContentView }) {
 
     return (
-        <article className='col'>
-            <nav>
-                <button onClick={() => setContentView(false)}>Back</button>
-            </nav>
-            <h3>{title}</h3>
-            <div>
+        <article className='col article'>
+            <p className='title'>{title}</p>
+            <div className='imgHolder'>
                 <img src={image} alt={title} />
             </div>
-            <p>{text}</p>
-            
+            <p className='summary'>{text}</p> 
+            <button className='articleButton' onClick={() => setContentView(false)}>Back</button> 
         </article>
     )
 }

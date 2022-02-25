@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Cookies from 'js-cookie';
 import { NavLink } from 'react-router-dom';
 import { Link } from "react-router-dom";
@@ -9,6 +9,20 @@ function Header(props) {
     const handleError = (err) => {
         console.log(err);
       }
+
+    useEffect(() => {
+        const getIsAdmin = async () => {
+            const response = await fetch('/rest-auth/user/').catch(handleError);
+            if (!response.ok) {
+                throw new Error('Netword response was not OK!')
+            } else {
+                const data = await response.json();
+                if (data.is_superuser == true)
+                    props.setAdmin(true)
+            }
+        }
+        getIsAdmin();
+    }, []);
 
     const handleLogout = async event => {
         event.preventDefault();
@@ -28,28 +42,29 @@ function Header(props) {
         const data = await response.json();
         Cookies.remove('Authorization', `Token ${data.key}`);
         props.setAuth(false);
-        props.setAdmin(false)
-        props.navigate('/popular')  
+        props.setAdmin(false)  
+        props.navigate('/popular') 
+           
     }
 
     const headerUser = (
-        <ul>
-            <li>
-                <NavLink to='/articles'>Your Articles</NavLink>
+        <ul className='row header mx-0'>
+            <li className='col navLinkButton mx-0'>
+                    <NavLink className='navLinks' to='/articles'>Your Articles</NavLink>
             </li>
-            <li>
-                <NavLink to='/create'>Create Article</NavLink>
+            <li className='col navLinkButton mx-0'>
+                <NavLink className='navLinks' to='/create'>Create Article</NavLink>
             </li>
-            <li>
-                <NavLink to='/popular'>Popular Articles</NavLink>
+            <li className='col navLinkButton mx-0'>
+                <NavLink className='navLinks' to='/popular'>Popular Articles</NavLink>
             </li>
-            <li>
-                <NavLink to='/trending'>Trending Articles</NavLink>
+            <li className='col navLinkButton mx-0'>
+                <NavLink className='navLinks' to='/trending'>Trending Articles</NavLink>
             </li>
-            <li>
-                <NavLink to='/all'>Articles</NavLink>
+            <li className='col navLinkButton mx-0'>
+                <NavLink className='navLinks' to='/all'>Articles</NavLink>
             </li>
-            <li>
+            <li className='col navLinkButton mx-0'>
                 <button type='button' name='logout' onClick={handleLogout}>Sign Out</button>
             </li>
         </ul>
@@ -57,43 +72,43 @@ function Header(props) {
     )
 
     const headerVistor = (
-        <ul>
-            <li>
-                <NavLink to='/popular'>Popular Articles</NavLink>
+        <ul className='row header mx-0'>
+            <li className=' col navLinkButton mx-0'>
+                <NavLink className='navLinks' to='/popular'>Popular Articles</NavLink>
             </li>
-            <li>
-                <NavLink to='/trending'>Trending Articles</NavLink>
+            <li className=' col navLinkButton mx-0'>
+                <NavLink className='navLinks' to='/trending'>Trending Articles</NavLink>
             </li>
-            <li>
-                <NavLink to='/all'>Articles</NavLink>
+            <li className='col navLinkButton mx-0'>
+                <NavLink className='navLinks' to='/all'>Articles</NavLink>
             </li>
-            <li>
-                <Link to='/login'>Login</Link>
+            <li className='col navLinkButton mx-0'>
+                <Link className='navLinks' to='/login'>Login</Link>
             </li>
-            <li>
-                <Link to='/register'>Create Account</Link>
+            <li className='col navLinkButton mx-0'>
+                <Link className='navLinks' to='/register'>Create Account</Link>
             </li>
         </ul>
     )
 
     const adminUser = (
-        <ul>
-            <li>
-                <NavLink to='/popular'>Popular Articles</NavLink>
+        <ul className='row header mx-0'>
+            <li className='col navLinkButton mx-0'>
+                <NavLink className='navLinks' to='/popular'>Popular Articles</NavLink>
             </li>
-            <li>
-                <NavLink to='/trending'>Trending Articles</NavLink>
+            <li className='col navLinkButton mx-0'>
+                <NavLink className='navLinks' to='/trending'>Trending Articles</NavLink>
             </li>
-            <li>
-                <NavLink to='/all'>Articles</NavLink>
+            <li className='col navLinkButton mx-0'>
+                <NavLink className='navLinks' to='/all'>Articles</NavLink>
             </li>
-            <li>
-                <NavLink to='/create'>Create Article</NavLink>
+            <li className='col navLinkButton mx-0'>
+                <NavLink className='navLinks'to='/create'>Create Article</NavLink>
             </li>
-            <li>
-                <NavLink to='/admin'>Site Articles</NavLink>
+            <li className='col navLinkButton mx-0'>
+                <NavLink className='navLinks' to='/admin'>Site Articles</NavLink>
             </li>
-            <li>
+            <li className='col navLinkButton mx-0'>
                 <button type='button' name='logout' onClick={handleLogout}>Sign Out</button>
             </li>
         </ul>

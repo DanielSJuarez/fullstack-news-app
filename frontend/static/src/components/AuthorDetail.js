@@ -3,13 +3,12 @@ import { useState } from 'react'
 function AuthorDetail({ title, image, text, id, summary}) {
  
     return (
-        <article className='col'>
-
-            <h3>{title}</h3>
-            <div>
+        <article className='col article'>
+            <p className='title'>{title}</p>
+            <div className='imgHolder'>
                 <img src={image} alt={title} />
             </div>
-            <p>{summary}</p>
+            <p className='summary'>{summary}</p>
             <p>{text}</p>
         </article>
     )

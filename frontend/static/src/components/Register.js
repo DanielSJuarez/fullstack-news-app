@@ -57,27 +57,26 @@ function Register(props){
     }
 
         return (
-            <div>
-            <h3>New Article</h3>
+        <div className='loginPlacholder'>
             <form onSubmit={handleCreateSubmit}>
-                <div>
+                <div className='col loginField'>
                     <label htmlFor='username'>Username</label>
-                    <input type='text' name='username' id='username' placeholder='username' onChange={newHandleInput} required value={newState.username} />
-                </div>
-                <div>
-                    <label htmlFor='email'>Email</label>
-                    <input type='email' name='email' id='email' placeholder='email' onChange={newHandleInput} required value={newState.email} />
-                </div>
-                <div>
-                    <label htmlFor='password1'>Password</label>
-                    <input type='password' name='password1' id='password' placeholder='password' onChange={newHandleInput} required value={newState.password1}></input>
-                </div>
-                <div>
-                    <label htmlFor='password2'>Confirm Password</label>
-                    <input type='password' name='password2' id='password' placeholder='password' onChange={newHandleInput} required value={newState.password2}></input>
+                    <input className='inputField' type='text' name='username' id='username' placeholder='username' onChange={newHandleInput} required value={newState.username} />
                 </div>
                 <div className='col loginField'>
-                    <button type='submit'>Create Account</button>
+                    <label htmlFor='email'>Email</label>
+                    <input className='inputField' type='email' name='email' id='email' placeholder='email' onChange={newHandleInput} required value={newState.email} />
+                </div>
+                <div className='col loginField'>
+                    <label htmlFor='password1'>Password</label>
+                    <input className='inputField' type='password' name='password1' id='password' placeholder='password' onChange={newHandleInput} required value={newState.password1}></input>
+                </div>
+                <div className='col loginField'>
+                    <label htmlFor='password2'>Confirm Password</label>
+                    <input className='inputField' type='password' name='password2' id='password' placeholder='password' onChange={newHandleInput} required value={newState.password2}></input>
+                </div>
+                <div className='col loginField'>
+                    <button className='loginRegisterButton' type='submit'>Create Account</button>
                 </div>
             </form>
         </div>

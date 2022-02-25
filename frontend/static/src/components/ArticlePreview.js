@@ -8,13 +8,13 @@ function ArticlePreview({title, image, summary, name, setGetTitle ,setContentVie
     }
 
     return(
-        <article className='col'>
-            <h3>{title}</h3>
-            <div>
+        <article className='article'>
+            <p className='title'>{title}</p>
+            <div className='imgHolder'>
                 <img src={image} alt={name} />
             </div>
-            <p>{summary}</p>
-            <button value={title} onClick={getArticle}>Read More ...</button>
+            <p className='summary'>{summary}</p>
+            <button className='articleButton' value={title} onClick={getArticle}>Read More ...</button>
         </article>
     )
 }

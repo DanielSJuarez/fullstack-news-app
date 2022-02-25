@@ -13,7 +13,7 @@ function App() {
   return (
 
     <div className="App">
-      <Header auth={auth} setAuth={setAuth} navigate={navigate} admin={admin} set={setAdmin}/>
+      <Header auth={auth} setAuth={setAuth} navigate={navigate} admin={admin} setAdmin={setAdmin}/>
       <h1>Daily Taco News</h1>
       <Outlet context={[auth, setAuth, navigate, admin, setAdmin]}/>
     </div>

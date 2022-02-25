@@ -32,12 +32,8 @@ function ArticlesListAll({handleError}) {
     const articleDetaillHTML = articleFilter.map(article => (
         <ArticleDetail key={article.id} {...article} setContentView={setContentView}/>
     ))
-
-    const articleFilterCatagory = articles.filter(article => (
-        article.catagory === 'POP'          
-    ))
     
-    const articlesHTML = articleFilterCatagory.map(article => (
+    const articlesHTML = articles.map(article => (
         <ArticlePreview key={article.id} {...article} setContentView={setContentView} setGetTitle={setGetTitle} getTitle={getTitle}/>
     ));
 

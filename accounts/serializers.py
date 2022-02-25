@@ -12,7 +12,7 @@ class UserDetailsSerializer(UserDetailsSerializer):
     class Meta(UserDetailsSerializer.Meta):
         fields = UserDetailsSerializer.Meta.fields + ('is_superuser',)
 
-class TokenSerializer(UserDetailsSerializer):
+class TokenSerializer(TokenSerializer):
     is_superuser = serializers.ReadOnlyField(source='user.is_superuser',)
     class Meta(TokenSerializer.Meta):
         model = TokenModel

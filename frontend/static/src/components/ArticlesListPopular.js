@@ -42,7 +42,7 @@ function ArticlesListPopular({handleError}) {
     ));
 
     return (
-        <div>
+        <div className='container'>
             {contentView ? articleDetaillHTML : articlesHTML}
         </div>
     )

@@ -10,13 +10,13 @@ function DraftDetail({ title, image, text, id, summary, preview, deleteArticle, 
     }
 
     const displayMode = (
-        <article className='col'>
+        <article className='col article'>
 
-            <h3>{title}</h3>
-            <div>
+            <p className='title'>{title}</p>
+            <div className='imgHolder'>
                 <img src={image} alt={title} />
             </div>
-            <p>{summary}</p>
+            <p className='summary'>{summary}</p>
             <p>{text}</p>
             <button onClick={() => setEdit(true)}>Edit</button>
             <button onClick={() => deleteArticle(id)}>Delete</button>
@@ -25,12 +25,12 @@ function DraftDetail({ title, image, text, id, summary, preview, deleteArticle, 
 
     const editMode = (
         <>
-        <article className='col'>
-                <h3>{title}</h3>
-                <div>
+        <article className='col article'>
+                <p className='title'>{title}</p>
+                <div className='imgHolder'>
                     <img src={image} alt={title} />
                  </div>
-                 <p>{summary}</p>
+                 <p className='summary'>{summary}</p>
                  <p>{text}</p>
             </article>
         <form onSubmit={change}>

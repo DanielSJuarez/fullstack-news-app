@@ -58,22 +58,22 @@ function Login(props){
     }
 
     return (
-        <div>
+        <div className='loginPlacholder'>
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className='col loginField'>
                     <label htmlFor='username'>Username</label>
-                    <input type='text' name='username' id='username' placeholder='username' onChange={handleInput} required value={state.username} />
+                    <input type='text' className='inputField' name='username' id='username' placeholder='username' onChange={handleInput} required value={state.username} />
                 </div>
-                <div>
+                <div className='col loginField'>
                     <label htmlFor='email'>Email</label>
-                    <input type='email' name='email' id='email' placeholder='email' onChange={handleInput} required value={state.email} />
+                    <input type='email'  className='inputField' name='email' id='email' placeholder='email' onChange={handleInput} required value={state.email} />
                 </div>
-                <div>
+                <div className='col loginField'>
                     <label htmlFor='password'>Password</label>
-                    <input type='password' name='password' id='password' placeholder='password' onChange={handleInput} required value={state.password}></input>
+                    <input type='password' className='inputField' name='password' id='password' placeholder='password' onChange={handleInput} required value={state.password}></input>
                 </div>
-                <div>
-                    <button type='submit'>Login</button>
+                <div className='col loginField'>
+                    <button className='loginRegisterButton' type='submit'>Login</button>
                 </div>
             </form>
         </div>
