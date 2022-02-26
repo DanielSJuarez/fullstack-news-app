@@ -38,7 +38,7 @@ function ArticlesListAll({handleError}) {
     ));
 
     return (
-        <div>
+        <div className='container'>
             {contentView ? articleDetaillHTML : articlesHTML}
         </div>
     )

@@ -95,42 +95,41 @@ function AdminDetail({id, title, text, summary, image, handleError , setAdminVie
         
 
     const listView = (
-        <button onClick={() => setStatus(true)}>Change status</button>
+        <button className='articleButton' onClick={() => setStatus(true)}>Change status</button>
     )
 
 
     const changeSatusView = (
         <div>
-            <button value='REJ' onClick={updateArticleStatus}>Reject</button>
-            <button value='PUB' onClick={updateArticleStatus}>Publish</button>
-            <button value='ARC' onClick={updateArticleStatus}>Archive</button> 
-            <button onClick={() => setStatus(false)}>Back</button> 
+            <button className='articleButton' value='REJ' onClick={updateArticleStatus}>Reject</button>
+            <button className='articleButton' value='PUB' onClick={updateArticleStatus}>Publish</button>
+            <button className='articleButton' value='ARC' onClick={updateArticleStatus}>Archive</button> 
+            <button className='articleButton' onClick={() => setStatus(false)}>Back</button> 
         </div>
     )
 
     const catagoryView = (
-        <button onClick={() => setSection(true)}>Change Article Catagory</button>
+        <button className='articleButton' onClick={() => setSection(true)}>Change Article Catagory</button>
     )
 
 
     const changeCatagoryView = (
         <div>
-            <button value='POP' onClick={updateArticleCatagory}>Popular</button>
-            <button value='TRD' onClick={updateArticleCatagory}>Trending</button>
-            <button value='ALL' onClick={updateArticleCatagory}>All</button> 
-            <button onClick={() => setSection(false)}>Back</button> 
+            <button className='articleButton' value='POP' onClick={updateArticleCatagory}>Popular</button>
+            <button className='articleButton' value='TRD' onClick={updateArticleCatagory}>Trending</button>
+            <button className='articleButton' value='ALL' onClick={updateArticleCatagory}>All</button> 
+            <button className='articleButton' onClick={() => setSection(false)}>Back</button> 
         </div>
     )
 
 
     return(
-        <article className='col'>
-
-            <h3>{title}</h3>
-            <div>
+        <article className='article'>
+            <h3 className='title'>{title}</h3>
+            <div className='imgHolder'>
                 <img src={image} alt={title} />
             </div>
-            <p>{summary}</p>
+            <p className='summary'>{summary}</p>
             <p>{text}</p>
             {status ? changeSatusView : listView}
             {section ? changeCatagoryView : catagoryView}

@@ -177,16 +177,16 @@ function AuthorArticleView({props}) {
     ))
 
     return (
-        <div>
-            <h2>Draft</h2>
+        <div className='container'>
+            <h2 className='sectionHead'>Draft</h2>
                 {authorDraftList}
-            <h2>Submitted</h2>
+            <h2 className='sectionHead'>Submitted</h2>
                 {authorSubmittedList}
-            <h2>Published</h2>
+            <h2 className='sectionHead'>Published</h2>
                 {authorPublishedList}
-            <h2>Rejected</h2>
+            <h2 className='sectionHead'>Rejected</h2>
                 {authorRejectedList}   
-            <h2>Archieved</h2>
+            <h2 className='sectionHead'>Archieved</h2>
                 {authorArchievedList}
         </div>
     )

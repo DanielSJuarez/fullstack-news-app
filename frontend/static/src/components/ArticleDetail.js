@@ -2,7 +2,7 @@ function ArticleDetail({ title, image, text, setContentView }) {
 
     return (
         <article className='col article'>
-            <p className='title'>{title}</p>
+            <h3 className='title'>{title}</h3>
             <div className='imgHolder'>
                 <img src={image} alt={title} />
             </div>

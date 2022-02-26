@@ -79,8 +79,8 @@ function CreateArticle (){
                 <input  className='inputField'type='file' name='articleImage' onChange={handleImage} />
                 {preview && <img src={preview} alt='' />}
             </div>
-            <button className='loginRegisterButton' type='submit' onClick={()=> setPhase('DRT')}>Save</button>
-            <button className='loginRegisterButton' type='submit' onClick={()=> setPhase('SUB')}>Save/Submit</button>
+            <button className='loginRegisterButton create' type='submit' onClick={()=> setPhase('DRT')}>Save</button>
+            <button className='loginRegisterButton create' type='submit' onClick={()=> setPhase('SUB')}>Save/Submit</button>
         </form>
     </div>
     )

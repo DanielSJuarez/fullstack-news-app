@@ -60,14 +60,14 @@ function AdminList() {
 
     return (
 
-        <div>
-            <h2>Submitted</h2>
+        <div className='container'>
+            <h2 className='sectionHead'>Submitted</h2>
                 {adminSubmittedList}
-            <h2>Published</h2>
+            <h2 className='sectionHead'>Published</h2>
                 {adminPublishedList}
-            <h2>Rejected</h2>
+            <h2 className='sectionHead'>Rejected</h2>
                 {adminRejectedList}   
-            <h2>Archieved</h2>
+            <h2 className='sectionHead'>Archieved</h2>
                 {adminArchievedList}
         </div>
 
