@@ -9,7 +9,7 @@ function AuthorDetail({ title, image, text, id, summary}) {
                 <img src={image} alt={title} />
             </div>
             <p className='summary'>{summary}</p>
-            <p>{text}</p>
+            <p className='summary'>{text}</p>
         </article>
     )
 }

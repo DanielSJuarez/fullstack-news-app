@@ -130,7 +130,7 @@ function AdminDetail({id, title, text, summary, image, handleError , setAdminVie
                 <img src={image} alt={title} />
             </div>
             <p className='summary'>{summary}</p>
-            <p>{text}</p>
+            <p className='summary'>{text}</p>
             {status ? changeSatusView : listView}
             {section ? changeCatagoryView : catagoryView}
         </article>

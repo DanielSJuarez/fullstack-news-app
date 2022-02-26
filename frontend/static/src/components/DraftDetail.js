@@ -16,7 +16,7 @@ function DraftDetail({ title, image, text, id, summary, preview, deleteArticle, 
                 <img src={image} alt={title} />
             </div>
             <p className='summary'>{summary}</p>
-            <p>{text}</p>
+            <p className='summary'>{text}</p>
             <button className='editDeleteButton' onClick={() => setEdit(true)}>Edit</button>
             <button className='editDeleteButton' onClick={() => deleteArticle(id)}>Delete</button>
         </article>
@@ -30,7 +30,7 @@ function DraftDetail({ title, image, text, id, summary, preview, deleteArticle, 
                     <img src={image} alt={title} />
                  </div>
                  <p className='summary'>{summary}</p>
-                 <p>{text}</p>
+                 <p className='summary'>{text}</p>
             </article>
         <form onSubmit={change}>
             <div className='col loginField'>
