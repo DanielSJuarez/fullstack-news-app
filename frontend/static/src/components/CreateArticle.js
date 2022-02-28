@@ -54,12 +54,14 @@ function CreateArticle (){
         }
 
         fetch('/api/v1/articles/user/', options);
+        e.target.reset()
         setTitle('');
         setText('');
         setSummary('');
         setPreview('');
         setPhase('');
-        setAddImage('')
+        setAddImage('');
+        
     }
 
     return  (
